@@ -1,24 +1,25 @@
 {
   "name": "zoo-command-install",
-  "version": "1.0.0",
-  "description": "zoo install command, based on fis-command-install",
-  "author": "zooble",
-  "license": "BSD",
-  "keywords": [
-    "fis-zoo",
-    "zoo-command-install"
-  ],
+  "version": "1.0.1",
+  "description": "install components for your project",
+  "main": "install",
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/xwenliang/zoo-command-install.git"
   },
+  "keywords": [
+    "fis-zoo",
+    "zoo-command-install"
+  ],
+  "author": {
+    "name": "zooble",
+    "email": "wenliang.web@gmail.com"
+  },
   "engines": {
     "node": ">= 0.8.0"
   },
-  "main": "install.js",
-  "scripts": {
-    "test": "mocha test/ut"
-  },
+  "license": "BSD",
   "dependencies": {},
   "devDependencies": {},
   "bugs": {
