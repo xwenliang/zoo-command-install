@@ -4,16 +4,33 @@
  */
 
 'use strict';
+var fs = require('fs');
+var https = require('https');
+//执行路径
+var processPath = process.cwd();
+//配置文件名
+var confFilename = 'package.json';
+//模板下载文件夹
+var modulesDir = 'modules';
+//页面中url  eg:  https://github.com/xwenliang/mobile_modules/blob/master/modules/Zepto/zepto.js
+//读取文件url eg:  https://raw.githubusercontent.com/xwenliang/mobile_modules/master/modules/Zepto/zepto.js
+var githubViewPort = '443',
+    githubViewHost = 'github.com',
+    githubViewPath = '/beefe/zoo-modules/tree/master/modules',
+    githubDownPort = '443',
+    githubDownHost = 'raw.githubusercontent.com',
+    githubDownPath = '/beefe/zoo-modules/master/modules';
+
 
 exports.name = 'install';
 exports.usage = '<names> [path] [options]';
 exports.desc = 'install components and demos';
 exports.register = function(commander){
-    
+    //console.log(commander);
     commander
         .option('--repos <url>', 'repository', String)
         .action(function(){
-           //创建本地路径
+            //创建本地路径
             function mkdirLocal(path, fn){
                 fs.exists(path, function(exists){
                     if(!exists){
@@ -53,8 +70,8 @@ exports.register = function(commander){
                                 var path = tempPathArr[i];
                                 if(/\/tree\//.test(path)){
                                     //dir /xwenliang/mobile_modules/tree/master/modules/Zepto/lib
-                                    var tempDir = /\/(modules.+)$/.exec(path).length > 0 ? /\/(modules.+)$/.exec(path)[1] : null;
-                                    mkdirLocal(processPath + '/' + tempDir, function(){
+                                    var tempDir = /\/modules\/(.+)$/.exec(path).length > 0 ? /\/modules\/(.+)$/.exec(path)[1] : null;
+                                    mkdirLocal(processPath + '/' + modulesDir + '/' + tempDir, function(){
                                         getPath(path);
                                     });  
                                 }else{
@@ -65,7 +82,7 @@ exports.register = function(commander){
                                     if(!filePath || !fileType){
                                         return;
                                     }
-                                    getContent(processPath + '/modules/' + filePath + '.' + fileType, path.replace(/blob\//, ''));
+                                    getContent(processPath + '/' + modulesDir + '/' + filePath + '.' + fileType, path.replace(/blob\//, ''));
                                 }
                             }
                         }
@@ -97,7 +114,7 @@ exports.register = function(commander){
             }
            
             //读取package.json
-            fs.readFile(processPath + '/package.json', function(err, data){
+            fs.readFile(processPath + '/' + confFilename, function(err, data){
                 if(err){
                     console.log('read package.json error:' + err);
                     return;
@@ -110,11 +127,11 @@ exports.register = function(commander){
                     console.log('not set modules-dependencies');
                     return;
                 }
-                mkdirLocal(processPath + '/modules', function(){
+                mkdirLocal(processPath + '/' + modulesDir, function(){
                     for (var i = 0; i < len; i++){
                         (function(i){
                             var moduleName = modulesKeys[i];
-                            mkdirLocal(processPath + '/modules/' + moduleName, function(){
+                            mkdirLocal(processPath + '/' + modulesDir + '/' + moduleName, function(){
                                 getPath(githubViewPath + '/' + moduleName);
                             });
                         })(i)
