@@ -20,7 +20,10 @@
     "node": ">= 0.8.0"
   },
   "license": "BSD",
-  "dependencies": {},
+  "dependencies": {
+    "jsdom": "^8.1.0",
+    "prompt": "^1.0.0"
+  },
   "devDependencies": {},
   "bugs": {
     "url": "https://github.com/xwenliang/fis-zoo/issues"
