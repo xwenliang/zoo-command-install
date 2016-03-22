@@ -72,9 +72,9 @@ exports.register = function(commander){
         if(moduleExit == true){
             var prompt = require('prompt');
             prompt.start();
-            var tip = moduleName + '模块已存在,是否要覆盖？（yes/no）';
+            var tip = moduleName + '模块已存在,是否要覆盖？（y/n）';
             prompt.get([tip], function(err, result){
-                if(result[tip] == 'yes'){
+                if(result[tip] == 'y'){
                     mkdirLocal(path.join(processPath, modulesDir, moduleName), function(){
                         getPath(githubViewProtocol + '://' +path.join( githubViewHost, githubViewPath, moduleName));
                     });
@@ -115,7 +115,7 @@ exports.register = function(commander){
             
         }).then(function(window){
             var $ = window.$;
-            var links = $('.files .js-directory-link');
+            var links = $('.files a[id]');
             var hasMoreFile = false;
             for(var i = 0; i < links.length; i++){
                 var href = links[i].href;
@@ -177,7 +177,7 @@ exports.register = function(commander){
             res.on('end', function(){
                 modulesOptions[modulesArr[module_i]]['downedNum']++;
                 if(modulesOptions[modulesArr[module_i]]['downedNum'] == len){
-                    process.stdout.write('\n'+ moduleName.green.bold + '下载完成'.green.bold + '\n');
+                    process.stdout.write(moduleName.green.bold + '下载完成'.green.bold + '\n');
                     downNextModule();
                 }
             });
@@ -232,7 +232,7 @@ exports.register = function(commander){
                     }).then(function(window){
                         new Promise(function(resolve, reject){
                             var $ = window.$;
-                            var links = $('.files .js-directory-link');
+                            var links = $('.files a[id]');
                             var arrModulesArr = [];
                             for(var i = 0; i < links.length; i++){
                                 var href = links[i].href;
