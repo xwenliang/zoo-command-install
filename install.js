@@ -210,13 +210,13 @@ fis.config.merge({
             },
             //css文件
             {
-                reg: /^(.*)\.(css|less)$/i,
+                reg: /^(.*)\\.(css|less)$/i,
                 useSprite: true,
                 release: '\$\{statics\}/$&'
             },
             //图片等媒体文件
             {
-                reg: /^(.*)\.(jpg|gif|png|mp3|mp4|ttf|pdf)$/i,
+                reg: /^(.*)\\.(jpg|gif|png|mp3|mp4|ttf|pdf)$/i,
                 release: '\$\{statics\}/$&'
             },
             //前端模版
