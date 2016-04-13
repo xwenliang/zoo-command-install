@@ -1,6 +1,6 @@
 {
   "name": "zoo-command-install",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "install components for your project",
   "main": "install",
   "scripts": {},
@@ -21,6 +21,7 @@
   },
   "license": "BSD",
   "dependencies": {
+    "jquery": "^1.12.3",
     "jsdom": "^8.1.0",
     "prompt": "^1.0.0"
   },
