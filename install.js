@@ -15,6 +15,8 @@ var processPath = process.cwd();
 var jquery = fs.readFileSync(path.join(__dirname, '/node_modules/jquery/dist/jquery.min.js'), "utf-8");
 //配置文件名
 var confFileName = 'zoo.json';
+//项目名称
+var projectName = '';
 //本地存放下载模块的文件夹名，可以在zoo.json里面设置，默认是common
 var downloadDirName = 'common';
 //远程目录名
@@ -186,12 +188,12 @@ function touchFisConf(){
 `//项目配置文件
 
 //项目名称
-var dir = '';
+var name = '/${projectName}';
 //项目domain，一般写测试domain
 var domain = '';
 
 fis.config.merge({
-    statics: dir,
+    statics: name,
     roadmap: {
         domain: domain,
         path: [
@@ -319,6 +321,7 @@ exports.register = function(commander){
                         return;
                     }
                     var options = JSON.parse(data);
+                    projectName ＝ options['projectName'] || downloadDirName;
                     downloadDirName = options['downloadDirName'] || downloadDirName;
                     targetArr = options['components'];
                     targetArr.forEach(function(v, i){
