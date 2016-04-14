@@ -207,7 +207,14 @@ fis.config.merge({
             {
                 reg: /^\\/${downloadDirName}\\/([^\\/]+)\\/(?:[^\\/]+)\\.js/,
                 isMod: true,
-                id: '$1/$2',
+                id: '$1',
+                release: '\$\{statics\}/$&'
+            },
+            //模板
+            {
+                reg: /^(.*)\\.(html|htm|phtml)$/i,
+                isHtmlLike: true,
+                useCache: false,
                 release: '\$\{statics\}/$&'
             },
             //css文件
@@ -321,7 +328,7 @@ exports.register = function(commander){
                         return;
                     }
                     var options = JSON.parse(data);
-                    projectName = options['projectName'] || projectName;
+                    projectName = options['name'] || projectName;
                     downloadDirName = options['downloadDirName'] || downloadDirName;
                     targetArr = options['components'];
                     targetArr.forEach(function(v, i){
