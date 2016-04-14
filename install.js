@@ -321,7 +321,7 @@ exports.register = function(commander){
                         return;
                     }
                     var options = JSON.parse(data);
-                    projectName ＝ options['projectName'] || downloadDirName;
+                    projectName = options['projectName'] || projectName;
                     downloadDirName = options['downloadDirName'] || downloadDirName;
                     targetArr = options['components'];
                     targetArr.forEach(function(v, i){

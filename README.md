@@ -2,12 +2,25 @@
 
 ## Usage
 
-    Usage: install <name> [options]
+	Usage: zoo install
 
-    Options:
-    
-      -h, --help         output usage information
-      -r, --repos <url>  repository url
+	Options:
+	
+		-h, --help	output usage information
+		-F			do not detect local files, force to overwrite
 
 
-zoo install command, based on fis-command-install
+## Example
+
+在项目根目录创建zoo.json，执行`zoo install`，即可生成基础的fis-conf.js并安装zoo.json中声明依赖的模块
+
+```
+	//zoo.json
+	{
+		{
+			"name": "example",//项目名称
+			"downloadDirName": "modules",//模块安装目录
+			"components": ["Zepto", "mo", "mod", "preload", "scrollPageCube"]//项目依赖的模块
+		}
+	}
+```
