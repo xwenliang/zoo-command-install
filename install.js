@@ -163,7 +163,7 @@ function getContent(filePath, url, len){
             process.stdout.write('.');
         }
         modulesOptions[targetArr[module_i]]['downingStart'] = true;
-        res.setEncoding('utf8');
+        //res.setEncoding('utf8');//with this line, write images will make error, why?
         var out = fs.createWriteStream(filePath);
         res.pipe(out);
         
